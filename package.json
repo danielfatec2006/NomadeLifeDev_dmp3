@@ -1,0 +1,11 @@
+{
+  "name": "nomadelifedev_dmp3",
+  "version": "1.0.0",
+  "description": "Plataforma em React com sistema de SPA e Google Cloud Platform, sistematizado com Firebase e Firestore.\r ![LogoDev](https://github.com/user-attachments/assets/0073bc76-8ef0-4d2b-91dc-7f71c3466971)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

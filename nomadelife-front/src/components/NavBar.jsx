@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './NavBar.module.css';
 import { useAuthentication } from '../hooks/useAuthentication'; 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const NavBar = () => {
   const { auth, logout } = useAuthentication();
@@ -24,28 +24,28 @@ const NavBar = () => {
       </div>
       <ul className={styles.links_list}>
         <li>
-          <a href="/">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          {!auth.currentUser && <a href="/login">Login</a>}
-        </li>
-        <li>
-          <a href="/register">Register</a>
-        </li>
-        <li>
-          <a href="#">New Post</a>
-        </li>
-        <li>
-          <a href="#">Dashboard</a>
-        </li>
-        <li>
-          <a href="#">About</a>
-        </li>
-        {auth.currentUser && (
-          <li>
-            <a className={styles.buttonExit} href="#" onClick={handleLogout}>Exit</a> 
+            {!auth.currentUser && <Link to="/login">Login</Link>}
           </li>
-        )}
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+          <li>
+            <Link to="/new-post">New Post</Link>
+          </li>
+          <li>
+            <Link to="/dashboard">Dashboard</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          {auth.currentUser && (
+            <li>
+              <a className={styles.buttonExit} href="#" onClick={handleLogout}>Exit</a>
+            </li>
+          )}
       </ul>
     </nav>
     </>
