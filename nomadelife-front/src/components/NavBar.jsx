@@ -1,7 +1,21 @@
-import React from 'react'
-import styles from './NavBar.module.css'
+import React, { useEffect } from 'react';
+import styles from './NavBar.module.css';
+import { useAuthentication } from '../hooks/useAuthentication'; 
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
+  const { auth, logout } = useAuthentication();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(); 
+    navigate('/login');
+  };
+
+  useEffect(() => {
+    
+  }, [auth])
+
   return (
     <>
     <nav className={styles.navbar}>
@@ -10,13 +24,13 @@ const NavBar = () => {
       </div>
       <ul className={styles.links_list}>
         <li>
-          <a href="#">Home</a>
+          <a href="/">Home</a>
         </li>
         <li>
-          <a href="#">Login</a>
+          {!auth.currentUser && <a href="/login">Login</a>}
         </li>
         <li>
-          <a href="#">Register</a>
+          <a href="/register">Register</a>
         </li>
         <li>
           <a href="#">New Post</a>
@@ -27,9 +41,11 @@ const NavBar = () => {
         <li>
           <a href="#">About</a>
         </li>
-        <li>
-          <a href="#">Exit</a>
-        </li>
+        {auth.currentUser && (
+          <li>
+            <a className={styles.buttonExit} href="#" onClick={handleLogout}>Exit</a> 
+          </li>
+        )}
       </ul>
     </nav>
     </>

@@ -24,6 +24,20 @@
     padding: .4em .6em;
 }
 
+.buttonExit {
+    background-color: gray;
+    border-radius: 5px;
+    font-weight: 700;
+    color: white;
+}
+
+.buttonExit:hover {
+    background-color: black;
+    border-radius: 5px;
+    font-weight: 700;
+    color: white;
+}
+
 .active{
     background-color: #000;
     color: #fff;

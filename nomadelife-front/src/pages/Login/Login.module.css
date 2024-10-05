@@ -5,3 +5,7 @@
 .login p{
     color: #aaa;
 }
+
+.error {
+    text-align: center;
+}
