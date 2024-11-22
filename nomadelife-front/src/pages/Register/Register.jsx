@@ -1,101 +1,103 @@
-import React, { useState, useEffect } from 'react';
-import styles from './Register.module.css';
-import { useAuthentication } from '../../hooks/useAuthentication';
-import { useNavigate } from 'react-router-dom';
+import styles from "./Register.module.css"
+
+import { useEffect, useState } from "react"
+import { useAuthentication } from "../../hooks/useAuthentication"
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+  const [displayName, setDisplayName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [error, setError] = useState("")
 
   const { register, error: authError, loading } = useAuthentication();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
+    e.preventDefault()
+
+    setError("")
 
     const user = {
-      name,
+      displayName,
       email,
       password,
-      confirmPassword
-    };
+    }
 
     if (password !== confirmPassword) {
-      setError('As senhas não coincidem.');
-      return;
+      setError("As senhas precisam ser iguais.")
+      return
     }
 
     const res = await register(user);
 
-    if (res) {
-      navigate('/login'); // Redirecionar para a página de criação de post
-    }
-  };
+  console.log(res);
+  }
 
   useEffect(() => {
     if (authError) {
-      setError(authError);
+      setError(authError)
     }
-  }, [authError]);
+  }, [authError])
 
   return (
     <div className={styles.register}>
-      <h2>Compartilhe suas experiências com outros nomades</h2>
+      <h1>Cadastre-se para postar</h1>
+      <p>Crie seu usuário e compartilhe suas histórias</p>
       <form onSubmit={handleSubmit}>
         <label>
           <span>Nome:</span>
           <input
-            type='text'
-            name='name'
+            type="text"
+            name="displayName"
             required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder='Entre com seu nome'
-          ></input>
+            placeholder="Nome do usuário"
+            onChange={(e) => setDisplayName(e.target.value)}
+            value={displayName}
+          />
         </label>
         <label>
           <span>E-mail:</span>
           <input
-            type='email'
-            name='email'
+            type="email"
+            name="email"
             required
-            value={email}
+            placeholder="E-mail do usuário"
             onChange={(e) => setEmail(e.target.value)}
-            placeholder='Entre com seu e-mail'
-          ></input>
+            value={email}
+          />
         </label>
         <label>
           <span>Senha:</span>
           <input
-            type='password'
-            name='password'
+            type="password"
+            name="password"
             required
-            value={password}
+            placeholder="Insira a senha"
             onChange={(e) => setPassword(e.target.value)}
-            placeholder='Entre com sua senha'
-          ></input>
+            value={password}
+          />
         </label>
         <label>
-          <span>Confirmação de Senha:</span>
+          <span>Confirmação de senha:</span>
           <input
-            type='password'
-            name='confirmPassword'
+            type="password"
+            name="confirmPassword"
             required
-            value={confirmPassword}
+            placeholder="Confirme a senha"
             onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder='Confirme sua senha'
-          ></input>
+            value={confirmPassword}
+          />
         </label>
-        {!loading && <button className='btn'>Cadastrar</button>}
-        {loading && <button className='btn' disabled>Aguarde...</button>}
-        {error && <p className='error'>{error}</p>}
+        {!loading && <button className="btn">Cadastrar-se</button>}
+        {loading && (
+          <button className="btn" disabled>
+            Aguarde...
+          </button>
+        )}
+        {error && <p className="error">{error}</p>}
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register
